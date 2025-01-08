@@ -1,6 +1,7 @@
 import { Fugaz_One, Open_Sans } from "next/font/google";
 import "./globals.css";
-
+import Link from "next/link";
+import { AuthProvider } from "@/context/AuthContext";
 const opensans = Open_Sans({
   subsets: ["latin"],
 });
@@ -18,7 +19,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   const header = (
     <header className="p-4 sm:p-8 flex items-center justify-between">
-      <h1 className="text-base sm:text-lg textGradient">MoodTracker</h1>
+      <Link href="/">
+        <h1 className="text-base sm:text-lg textGradient">MoodTracker</h1>
+      </Link>
+
       <div className="flex items-center justify-between">placeholder</div>
     </header>
   );
@@ -32,9 +36,11 @@ export default function RootLayout({ children }) {
       <body
         className={`  w-full ,max-w-[1000px] mx-auto text-sm:text-base min-h-screen flex flex-col text-slate-700 ${opensans.className} antialiased `}
       >
-        {header}
-        {children}
-        {footer}
+        <AuthProvider>
+          {header}
+          {children}
+          {footer}
+        </AuthProvider>
       </body>
     </html>
   );

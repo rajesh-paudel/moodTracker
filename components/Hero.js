@@ -2,6 +2,7 @@ import React from "react";
 import { Fugaz_One } from "next/font/google";
 import Button from "./Button";
 import Calender from "./Calender";
+import Link from "next/link";
 
 const fugaz = Fugaz_One({
   subsets: ["latin"],
@@ -23,9 +24,15 @@ function Hero() {
         <span className=" font-medium ">every dy of every year </span>
       </p>
       <div className="grid grid-cols-2 gap-4 w-fit mx-auto">
-        <Button text="Signup" />
-        <Button text="Login" dark />
+        <Link href="/dashboard">
+          <Button text="Signup" />
+        </Link>
+
+        <Link href="/dashboard">
+          <Button text="Login" dark />
+        </Link>
       </div>
+      <Calender demo />
     </div>
   );
 }

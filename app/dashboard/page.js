@@ -4,7 +4,7 @@ import Main from "@/components/Main";
 import React from "react";
 
 function page() {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
   let children = <Login />;
   if (isAuthenticated) {
     children = <Dashboard />;

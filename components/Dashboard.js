@@ -1,11 +1,22 @@
+"use client";
 import React from "react";
+import { useEffect, useState } from "react";
 import { Fugaz_One } from "next/font/google";
 import Calender from "./Calender";
+import { useAuth } from "@/context/AuthContext";
 const fugaz = Fugaz_One({
   subsets: ["latin"],
   weight: ["400"],
 });
 function Dashboard() {
+  const { currentUser, userData, setUserData } = useAuth();
+  const [data, setData] = useState({});
+
+  function countValues() {}
+
+  function handleSetMood(mood, day, month, year) {
+    const newData = { ...userData };
+  }
   const statuses = {
     num_days: 14,
     time_remaining: "13:14:26",
@@ -19,6 +30,13 @@ function Dashboard() {
     Good: "😊",
     Elated: "😍",
   };
+
+  useEffect(() => {
+    if (!currentUser || !userData) {
+      return;
+      setData(userData);
+    }
+  }, [currentUser, userData]);
   return (
     <div className="flex flex-col flex-1 gap-8 sm:gap-12 md:gap-16">
       <div className="grid grid-cols-3 bg-indigo-50 text-indigo-500 rounded-lg">
@@ -61,7 +79,7 @@ function Dashboard() {
           );
         })}
       </div>
-      <Calender />
+      <Calender data={data} handleSetMood={handleSetMood} />
     </div>
   );
 }
